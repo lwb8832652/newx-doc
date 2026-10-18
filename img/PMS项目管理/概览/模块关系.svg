@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrow-project" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-knowledge" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0891b2"/>
+    </marker>
+    <style>
+      .title{font:700 32px sans-serif;fill:#172033}
+      .subtitle{font:16px sans-serif;fill:#64748b}
+      .panel-title{font:700 24px sans-serif}
+      .node-title{font:700 17px sans-serif;fill:#172033}
+      .node-text{font:15px sans-serif;fill:#334155}
+      .note{font:14px sans-serif;fill:#64748b}
+      .project-panel{fill:#f8fbff;stroke:#2563eb;stroke-width:2}
+      .knowledge-panel{fill:#f4fcfd;stroke:#0891b2;stroke-width:2}
+      .project-node{fill:#fff;stroke:#93c5fd;stroke-width:1.5}
+      .knowledge-node{fill:#fff;stroke:#67e8f9;stroke-width:1.5}
+      .project-line{stroke:#2563eb;stroke-width:2;fill:none;marker-end:url(#arrow-project)}
+      .knowledge-line{stroke:#0891b2;stroke-width:2;fill:none;marker-end:url(#arrow-knowledge)}
+      .dashed{stroke-dasharray:7 6}
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#fff"/>
+  <text x="800" y="48" text-anchor="middle" class="title">PMS 项目中心与知识中心表关系</text>
+  <text x="800" y="78" text-anchor="middle" class="subtitle">项目中心与知识中心分别维护业务数据；两侧没有直接的数据库外键关系</text>
+
+  <!-- 项目中心：17 张表 -->
+  <rect x="35" y="110" width="740" height="740" rx="16" class="project-panel"/>
+  <text x="405" y="150" text-anchor="middle" class="panel-title" fill="#2563eb">项目中心（17 张表）</text>
+
+  <rect x="280" y="175" width="250" height="58" rx="10" class="project-node"/>
+  <text x="405" y="211" text-anchor="middle" class="node-title">pms_project</text>
+  <text x="405" y="258" text-anchor="middle" class="note">项目主表，其他项目数据以 project_id 归属</text>
+
+  <rect x="65" y="300" width="205" height="88" rx="10" class="project-node"/>
+  <text x="167" y="326" text-anchor="middle" class="node-title">项目关系</text>
+  <text x="167" y="350" text-anchor="middle" class="node-text">project_member</text>
+  <text x="167" y="371" text-anchor="middle" class="node-text">group_relation / favorite</text>
+
+  <rect x="297" y="300" width="205" height="88" rx="10" class="project-node"/>
+  <text x="399" y="326" text-anchor="middle" class="node-title">项目执行</text>
+  <text x="399" y="350" text-anchor="middle" class="node-text">pms_iteration</text>
+  <text x="399" y="371" text-anchor="middle" class="node-text">pms_project_announcement</text>
+
+  <rect x="530" y="300" width="205" height="88" rx="10" class="project-node"/>
+  <text x="632" y="326" text-anchor="middle" class="node-title">项目模板</text>
+  <text x="632" y="350" text-anchor="middle" class="node-text">pms_project_template</text>
+  <text x="632" y="371" text-anchor="middle" class="note">创建时复制配置</text>
+
+  <path d="M405 233 V275 H167 V300" class="project-line"/>
+  <path d="M405 233 V300" class="project-line"/>
+  <path d="M405 233 V275 H632 V300" class="project-line dashed"/>
+
+  <rect x="65" y="435" width="670" height="190" rx="10" class="project-node"/>
+  <text x="400" y="468" text-anchor="middle" class="node-title">工作项主表与协作表</text>
+  <rect x="90" y="490" width="225" height="100" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="202" y="525" text-anchor="middle" class="node-title">pms_work_item</text>
+  <text x="202" y="550" text-anchor="middle" class="node-text">需求 / 任务 / 缺陷</text>
+  <text x="202" y="574" text-anchor="middle" class="note">iteration_id / parent_id</text>
+  <rect x="340" y="490" width="370" height="100" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="525" y="520" text-anchor="middle" class="node-title">状态、看板与协作</text>
+  <text x="525" y="546" text-anchor="middle" class="node-text">status / board / member / user_sort</text>
+  <text x="525" y="570" text-anchor="middle" class="node-text">work_log / label / comment / activity</text>
+  <path d="M399 388 V435" class="project-line"/>
+
+  <text x="65" y="673" class="note">项目主表 → 迭代、工作项；工作项再关联状态、看板、成员及协作记录</text>
+  <text x="65" y="704" class="note">项目模板不与已创建项目建立持久外键，创建时复制默认事项配置</text>
+  <text x="65" y="790" class="note">项目中心表：pms_project、pms_project_*、pms_iteration、pms_work_item*</text>
+
+  <!-- 知识中心：16 张表 -->
+  <rect x="825" y="110" width="740" height="740" rx="16" class="knowledge-panel"/>
+  <text x="1195" y="150" text-anchor="middle" class="panel-title" fill="#0891b2">知识中心（16 张表）</text>
+
+  <rect x="1070" y="175" width="250" height="58" rx="10" class="knowledge-node"/>
+  <text x="1195" y="211" text-anchor="middle" class="node-title">pms_knowledge_library</text>
+  <text x="1195" y="258" text-anchor="middle" class="note">知识库主表，内容通过 library_id 归属</text>
+
+  <rect x="855" y="300" width="205" height="88" rx="10" class="knowledge-node"/>
+  <text x="957" y="326" text-anchor="middle" class="node-title">知识库关系</text>
+  <text x="957" y="350" text-anchor="middle" class="node-text">library_member</text>
+  <text x="957" y="371" text-anchor="middle" class="node-text">group / group_relation</text>
+
+  <rect x="1087" y="300" width="205" height="88" rx="10" class="knowledge-node"/>
+  <text x="1189" y="326" text-anchor="middle" class="node-title">目录与文档</text>
+  <text x="1189" y="350" text-anchor="middle" class="node-text">folder / document</text>
+  <text x="1189" y="371" text-anchor="middle" class="node-text">folder_id / parent_id</text>
+
+  <rect x="1320" y="300" width="205" height="88" rx="10" class="knowledge-node"/>
+  <text x="1422" y="326" text-anchor="middle" class="node-title">知识库模板</text>
+  <text x="1422" y="350" text-anchor="middle" class="node-text">library_template</text>
+  <text x="1422" y="371" text-anchor="middle" class="note">创建时复制文档</text>
+
+  <path d="M1195 233 V275 H957 V300" class="knowledge-line"/>
+  <path d="M1195 233 V300" class="knowledge-line"/>
+  <path d="M1195 233 V275 H1422 V300" class="knowledge-line dashed"/>
+
+  <rect x="855" y="435" width="670" height="190" rx="10" class="knowledge-node"/>
+  <text x="1190" y="468" text-anchor="middle" class="node-title">内容权限与互动表</text>
+  <rect x="880" y="490" width="300" height="100" rx="8" fill="#ecfeff" stroke="#a5f3fc"/>
+  <text x="1030" y="520" text-anchor="middle" class="node-title">内容协作权限</text>
+  <text x="1030" y="546" text-anchor="middle" class="node-text">content_permission</text>
+  <text x="1030" y="570" text-anchor="middle" class="node-text">content_permission_member</text>
+  <rect x="1205" y="490" width="295" height="100" rx="8" fill="#ecfeff" stroke="#a5f3fc"/>
+  <text x="1352" y="520" text-anchor="middle" class="node-title">文档互动与使用</text>
+  <text x="1352" y="546" text-anchor="middle" class="node-text">comment / like / share / label</text>
+  <text x="1352" y="570" text-anchor="middle" class="node-text">favorite / view_record / recycle</text>
+  <path d="M1189 388 V435" class="knowledge-line"/>
+
+  <text x="855" y="673" class="note">知识库 → 文件夹、文档；权限、评论、分享和使用记录按内容编号维护</text>
+  <text x="855" y="704" class="note">知识库模板不与已创建知识库建立持久外键，创建时复制默认文档</text>
+  <text x="855" y="790" class="note">知识中心表：pms_knowledge_library*、folder、document、content_*、interaction、recycle</text>
+
+  <text x="800" y="875" text-anchor="middle" class="subtitle">system_users、system_dept 和文件存储能力由平台模块复用，不计入 PMS 业务表</text>
+</svg>

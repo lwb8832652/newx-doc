@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960" role="img" aria-labelledby="title desc">
+  <title id="title">HRM 绩效模块表关系</title>
+  <desc id="desc">展示绩效模板、绩效计划、员工考核、阶段、指标评分、动作记录和申诉记录之间的关系</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#0f172a}
+      .section{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#334155}
+      .name{font:700 16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#0f172a}
+      .field{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#334155}
+      .note{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#475569}
+      .box{fill:#fff;stroke:#94a3b8;stroke-width:1.5;rx:10}
+      .template{fill:#eff6ff;stroke:#60a5fa}
+      .plan{fill:#fff7ed;stroke:#fb923c}
+      .runtime{fill:#f0fdf4;stroke:#4ade80}
+      .record{fill:#faf5ff;stroke:#c084fc}
+      .line{fill:none;stroke:#64748b;stroke-width:1.8;marker-end:url(#arrow)}
+      .primary{fill:none;stroke:#2563eb;stroke-width:2.2;marker-end:url(#arrowBlue)}
+      .snapshot{fill:none;stroke:#64748b;stroke-width:1.6;stroke-dasharray:7 5;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="960" fill="#f8fafc"/>
+  <text x="60" y="56" class="title">HRM 绩效模块表关系</text>
+  <text x="60" y="88" class="note">模板配置以 JSON 保存；创建计划时复制为计划快照，启动计划时再物化为每名员工的运行数据</text>
+
+  <text x="60" y="132" class="section">模板与计划</text>
+  <rect x="60" y="154" width="370" height="146" class="box template"/>
+  <text x="78" y="184" class="name">hrm_performance_assessment_template</text>
+  <text x="78" y="211" class="field">score_calculation / upper_limit_score</text>
+  <text x="78" y="235" class="field">dimension_count / quota_count</text>
+  <text x="78" y="259" class="field">dimensions(JSON) / status</text>
+  <text x="78" y="283" class="note">修改时停用旧记录并生成新版本</text>
+
+  <rect x="60" y="340" width="370" height="124" class="box template"/>
+  <text x="78" y="370" class="name">hrm_performance_result_template</text>
+  <text x="78" y="397" class="field">levels(JSON：区间、等级、系数)</text>
+  <text x="78" y="421" class="field">status</text>
+  <text x="78" y="447" class="note">修改时生成新版本</text>
+
+  <rect x="555" y="142" width="500" height="326" class="box plan"/>
+  <text x="573" y="172" class="name">hrm_performance_plan</text>
+  <text x="573" y="199" class="field">cycle_type / cycle / start_time / end_time</text>
+  <text x="573" y="223" class="field">scopes(JSON)</text>
+  <text x="573" y="247" class="field">assessment_template_id / assessment_config(JSON)</text>
+  <text x="573" y="271" class="field">result_template_id / result_config(JSON)</text>
+  <text x="573" y="295" class="field">quota_setting_type / target_confirmation</text>
+  <text x="573" y="319" class="field">target_confirmation_stage / review_stages(JSON)</text>
+  <text x="573" y="343" class="field">result_audit_stages / appeal_stages(JSON)</text>
+  <text x="573" y="367" class="field">appeal_timeout_days / appeal_timeout_action</text>
+  <text x="573" y="391" class="field">sync_to_salary / paid_for_month</text>
+  <text x="573" y="415" class="field">stage_type / status / operation_type</text>
+  <text x="573" y="445" class="note">计划聚合根，保存模板编号和不可变业务快照</text>
+
+  <rect x="1180" y="220" width="340" height="124" class="box runtime"/>
+  <text x="1198" y="250" class="name">hrm_employee</text>
+  <text x="1198" y="277" class="field">id / dept_id / user_id</text>
+  <text x="1198" y="301" class="field">leader_employee_id</text>
+  <text x="1198" y="327" class="note">参评人、处理人、评分人均关联员工</text>
+
+  <text x="60" y="530" class="section">员工考核运行态</text>
+  <rect x="555" y="552" width="500" height="190" class="box runtime"/>
+  <text x="573" y="582" class="name">hrm_performance_assessment</text>
+  <text x="573" y="609" class="field">plan_id → plan.id / employee_id → employee.id</text>
+  <text x="573" y="633" class="field">status / process_status / stage_type / stage_sort</text>
+  <text x="573" y="657" class="field">score / result_level / coefficient</text>
+  <text x="573" y="681" class="field">审核、结果确认、申诉字段</text>
+  <text x="573" y="705" class="field">archive_time</text>
+  <text x="573" y="729" class="note">每个计划、每名参评员工一条主记录</text>
+
+  <rect x="60" y="552" width="380" height="142" class="box runtime"/>
+  <text x="78" y="582" class="name">hrm_performance_assessment_dimension</text>
+  <text x="78" y="609" class="field">assessment_id → assessment.id</text>
+  <text x="78" y="633" class="field">quota_type / weight / allow_edit / sort</text>
+  <text x="78" y="659" class="note">计划指标快照物化后的维度</text>
+
+  <rect x="60" y="742" width="380" height="160" class="box runtime"/>
+  <text x="78" y="772" class="name">hrm_performance_assessment_quota</text>
+  <text x="78" y="799" class="field">assessment_id / dimension_id</text>
+  <text x="78" y="823" class="field">preset / weight / target_value / actual_value</text>
+  <text x="78" y="847" class="field">self_score / reviewer_score / final_score</text>
+  <text x="78" y="875" class="note">运行中的指标、目标和汇总得分</text>
+
+  <rect x="1160" y="500" width="380" height="194" class="box runtime"/>
+  <text x="1178" y="530" class="name">hrm_performance_assessment_stage</text>
+  <text x="1178" y="557" class="field">assessment_id → assessment.id</text>
+  <text x="1178" y="581" class="field">type / sort / status</text>
+  <text x="1178" y="605" class="field">handler_employee_id / rater_type / weight</text>
+  <text x="1178" y="629" class="field">reject_authority / deadline_time</text>
+  <text x="1178" y="653" class="field">score / result_level / comment</text>
+  <text x="1178" y="679" class="note">每个考核的全部流程节点</text>
+
+  <rect x="1160" y="742" width="380" height="160" class="box record"/>
+  <text x="1178" y="772" class="name">hrm_performance_assessment_quota_score</text>
+  <text x="1178" y="799" class="field">assessment_stage_id → stage.id</text>
+  <text x="1178" y="823" class="field">assessment_quota_id → quota.id</text>
+  <text x="1178" y="847" class="field">score / comment</text>
+  <text x="1178" y="875" class="note">每个评分节点对每个指标的独立得分</text>
+
+  <rect x="555" y="790" width="500" height="112" class="box record"/>
+  <text x="573" y="820" class="name">assessment_action_record / appeal_record</text>
+  <text x="573" y="847" class="field">assessment_id / stage_id / employee_id / type / status</text>
+  <text x="573" y="875" class="note">动作时间线；申诉选择的待重评阶段</text>
+
+  <path d="M430 226 H555" class="snapshot"/>
+  <path d="M430 402 C500 402 500 330 555 330" class="snapshot"/>
+  <path d="M805 468 V552" class="primary"/>
+  <path d="M1180 282 H1055" class="line"/>
+  <path d="M1180 305 C1100 305 1120 628 1055 628" class="line"/>
+  <path d="M555 620 H440" class="primary"/>
+  <path d="M250 694 V742" class="primary"/>
+  <path d="M1055 620 H1160" class="primary"/>
+  <path d="M1350 694 V742" class="primary"/>
+  <path d="M250 902 V930 H1350 V902" class="primary"/>
+  <path d="M805 742 V790" class="primary"/>
+  <path d="M1160 650 C1100 650 1090 846 1055 846" class="line"/>
+
+  <text x="465" y="212" class="note">assessment_config 快照</text>
+  <text x="449" y="390" class="note">result_config 快照</text>
+  <text x="816" y="516" class="note">1 : N</text>
+  <text x="464" y="608" class="note">1 : N</text>
+  <text x="1072" y="608" class="note">1 : N</text>
+</svg>

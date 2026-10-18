@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
+  <title id="title">HRM 招聘管理表关系</title>
+  <desc id="desc">展示职位类型、招聘职位、候选人、面试、渠道、配置以及部门和员工引用关系。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+    <style>
+      .title { font:700 27px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#0f172a; }
+      .subtitle,.note { font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#475569; }
+      .box { rx:12; ry:12; stroke-width:1.5; }
+      .core { fill:#bfdbfe; stroke:#1d4ed8; stroke-width:2; }
+      .main { fill:#dbeafe; stroke:#2563eb; }
+      .detail { fill:#f8fafc; stroke:#64748b; }
+      .system { fill:#fef3c7; stroke:#d97706; }
+      .config { fill:#ecfdf5; stroke:#059669; }
+      .box-title { font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#0f172a; }
+      .box-sub { font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#475569; }
+      .field { font:13px ui-monospace,SFMono-Regular,Menlo,monospace; fill:#334155; }
+      .edge { fill:none; stroke:#64748b; stroke-width:1.6; stroke-dasharray:7 5; }
+      .edge-label { font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#334155; }
+      .label-bg { fill:#fff; opacity:.94; }
+    </style>
+  </defs>
+  <rect width="1600" height="920" fill="#fff" />
+  <text x="800" y="42" text-anchor="middle" class="title">HRM 招聘管理表关系</text>
+  <text x="800" y="68" text-anchor="middle" class="subtitle">职位 → 候选人 → 多轮面试 → 员工档案；虚线均为逻辑关联</text>
+
+  <rect x="80" y="120" width="280" height="185" class="box detail" />
+  <text x="220" y="151" text-anchor="middle" class="box-title">hrm_recruit_post_type</text>
+  <text x="220" y="177" text-anchor="middle" class="box-sub">职位类型树</text>
+  <text x="105" y="211" class="field">id / name / parent_id</text>
+  <text x="105" y="237" class="field">sort / status</text>
+
+  <rect x="500" y="105" width="340" height="350" class="box main" />
+  <text x="670" y="136" text-anchor="middle" class="box-title">hrm_recruit_post</text>
+  <text x="670" y="162" text-anchor="middle" class="box-sub">招聘职位</text>
+  <text x="530" y="196" class="field">id / post_name / dept_id</text>
+  <text x="530" y="221" class="field">post_type_id / area_id / job_nature</text>
+  <text x="530" y="246" class="field">recruit_num / reason</text>
+  <text x="530" y="271" class="field">work_time / education_require</text>
+  <text x="530" y="296" class="field">min_salary / max_salary / salary_unit</text>
+  <text x="530" y="321" class="field">min_age / max_age / latest_entry_time</text>
+  <text x="530" y="346" class="field">owner_employee_id</text>
+  <text x="530" y="371" class="field">interview_employee_ids（数组）</text>
+  <text x="530" y="396" class="field">description / emergency_level</text>
+  <text x="530" y="421" class="field">status / stop_reason</text>
+
+  <rect x="1020" y="105" width="360" height="375" class="box core" />
+  <text x="1200" y="136" text-anchor="middle" class="box-title">hrm_recruit_candidate</text>
+  <text x="1200" y="162" text-anchor="middle" class="box-sub">候选人</text>
+  <text x="1050" y="196" class="field">id / name / mobile / sex / age</text>
+  <text x="1050" y="222" class="field">post_id / channel_id</text>
+  <text x="1050" y="248" class="field">work_time / education / graduate_school</text>
+  <text x="1050" y="274" class="field">latest_work_place</text>
+  <text x="1050" y="300" class="field">status / stage_number</text>
+  <text x="1050" y="326" class="field">status_update_time / entry_time</text>
+  <text x="1050" y="352" class="field">eliminate / remark</text>
+  <text x="1050" y="378" class="field">resume_urls（数组）</text>
+
+  <rect x="1010" y="590" width="380" height="255" class="box main" />
+  <text x="1200" y="621" text-anchor="middle" class="box-title">hrm_recruit_interview</text>
+  <text x="1200" y="647" text-anchor="middle" class="box-sub">面试记录（候选人一对多）</text>
+  <text x="1040" y="681" class="field">id / candidate_id / stage_number</text>
+  <text x="1040" y="707" class="field">type / interview_time / address</text>
+  <text x="1040" y="733" class="field">interview_employee_id</text>
+  <text x="1040" y="759" class="field">other_interview_employee_ids（数组）</text>
+  <text x="1040" y="785" class="field">result / evaluate / cancel_reason</text>
+
+  <rect x="80" y="390" width="280" height="190" class="box config" />
+  <text x="220" y="421" text-anchor="middle" class="box-title">hrm_recruit_channel</text>
+  <text x="220" y="447" text-anchor="middle" class="box-sub">招聘渠道</text>
+  <text x="105" y="481" class="field">id / name / system_flag</text>
+  <text x="105" y="507" class="field">status / sort / remark</text>
+
+  <rect x="80" y="660" width="280" height="170" class="box config" />
+  <text x="220" y="691" text-anchor="middle" class="box-title">hrm_config</text>
+  <text x="220" y="717" text-anchor="middle" class="box-sub">淘汰原因设置</text>
+  <text x="105" y="751" class="field">type = 1</text>
+  <text x="105" y="777" class="field">value / sort</text>
+
+  <rect x="500" y="590" width="300" height="220" class="box system" />
+  <text x="650" y="621" text-anchor="middle" class="box-title">hrm_employee</text>
+  <text x="650" y="647" text-anchor="middle" class="box-sub">员工主档/招聘关系人员</text>
+  <text x="530" y="681" class="field">id / user_id / name</text>
+  <text x="530" y="707" class="field">candidate_id / channel_id</text>
+  <text x="530" y="733" class="field">entry_status</text>
+
+  <rect x="500" y="495" width="300" height="70" class="box system" />
+  <text x="650" y="526" text-anchor="middle" class="box-title">system_dept</text>
+  <text x="650" y="551" text-anchor="middle" class="box-sub">用人部门</text>
+
+  <path d="M360 210 L500 210" class="edge" />
+  <text x="386" y="197" class="edge-label">post_type_id → id</text>
+  <path d="M840 245 L1020 245" class="edge" />
+  <rect x="875" y="221" width="110" height="21" class="label-bg" />
+  <text x="930" y="236" text-anchor="middle" class="edge-label">post_id → post.id</text>
+  <path d="M1200 480 L1200 590" class="edge" />
+  <text x="1212" y="541" class="edge-label">candidate_id → candidate.id</text>
+  <path d="M360 485 C600 500 810 390 1020 300" class="edge" />
+  <text x="600" y="464" class="edge-label">candidate.channel_id → channel.id</text>
+  <path d="M650 565 L650 455" class="edge" />
+  <text x="662" y="522" class="edge-label">post.dept_id → dept.id</text>
+  <path d="M800 675 C900 610 930 385 840 325" class="edge" />
+  <text x="820" y="556" class="edge-label">owner/面试官 → employee.id</text>
+  <path d="M800 730 L1010 730" class="edge" />
+  <text x="840" y="717" class="edge-label">面试官 → employee.id</text>
+  <path d="M1020 405 C900 480 820 575 800 655" class="edge" />
+  <text x="845" y="503" class="edge-label">employee.candidate_id → candidate.id</text>
+  <path d="M360 535 C410 585 440 665 500 700" class="edge" />
+  <text x="375" y="620" class="edge-label">employee.channel_id → channel.id</text>
+
+  <path d="M1450 590 C1510 565 1510 490 1380 420" class="edge" />
+  <text x="1390" y="542" class="edge-label">候选人有多轮面试</text>
+
+  <text x="80" y="885" class="note">说明：招聘职位不删除，以招聘中/停止招聘维护生命周期；职位负责人和面试官均关联在职员工主档。</text>
+</svg>

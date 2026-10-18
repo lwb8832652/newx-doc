@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-labelledby="title desc">
+  <title id="title">HRM 员工管理表关系</title>
+  <desc id="desc">以员工主档为中心，展示账号、部门、招聘来源、经历、合同、附件、异动、离职、工资卡、个人备忘和字段配置。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+    <style>
+      .title { font:700 27px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#0f172a; }
+      .subtitle,.note { font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#475569; }
+      .box { rx:12; ry:12; stroke-width:1.5; }
+      .core { fill:#bfdbfe; stroke:#1d4ed8; stroke-width:2; }
+      .system { fill:#fef3c7; stroke:#d97706; }
+      .detail { fill:#f8fafc; stroke:#64748b; }
+      .life { fill:#fce7f3; stroke:#db2777; }
+      .config { fill:#ecfdf5; stroke:#059669; }
+      .box-title { font:700 16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#0f172a; }
+      .box-sub { font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#475569; }
+      .field { font:12px ui-monospace,SFMono-Regular,Menlo,monospace; fill:#334155; }
+      .edge { fill:none; stroke:#64748b; stroke-width:1.5; stroke-dasharray:7 5; }
+      .edge-label { font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; fill:#334155; }
+      .label-bg { fill:#fff; opacity:.94; }
+      .small-title { font-size:14px; }
+    </style>
+  </defs>
+  <rect width="1600" height="1120" fill="#fff" />
+  <text x="800" y="42" text-anchor="middle" class="title">HRM 员工管理表关系</text>
+  <text x="800" y="68" text-anchor="middle" class="subtitle">员工主档独立于后台账号；虚线为 Service 维护的逻辑关联</text>
+
+  <rect x="640" y="350" width="320" height="360" class="box core" />
+  <text x="800" y="382" text-anchor="middle" class="box-title">hrm_employee</text>
+  <text x="800" y="407" text-anchor="middle" class="box-sub">员工主档</text>
+  <text x="670" y="440" class="field">id / name / job_number</text>
+  <text x="670" y="465" class="field">user_id / mobile / email</text>
+  <text x="670" y="490" class="field">dept_id / leader_employee_id</text>
+  <text x="670" y="515" class="field">entry_status / status / type</text>
+  <text x="670" y="540" class="field">entry_time / probation / regular_time</text>
+  <text x="670" y="565" class="field">leave_time / company_age_start_time</text>
+  <text x="670" y="590" class="field">post_name / post_level / work_address</text>
+  <text x="670" y="615" class="field">channel_id / candidate_id</text>
+  <text x="670" y="640" class="field">birthday / id_type / id_number</text>
+  <text x="670" y="665" class="field">remark</text>
+
+  <rect x="60" y="120" width="260" height="135" class="box system" />
+  <text x="190" y="150" text-anchor="middle" class="box-title">system_users</text>
+  <text x="190" y="176" text-anchor="middle" class="box-sub">后台登录账号</text>
+  <text x="85" y="210" class="field">id / nickname / avatar</text>
+
+  <rect x="380" y="120" width="260" height="155" class="box system" />
+  <text x="510" y="150" text-anchor="middle" class="box-title">system_dept</text>
+  <text x="510" y="176" text-anchor="middle" class="box-sub">部门</text>
+  <text x="405" y="210" class="field">id / parent_id / name</text>
+  <text x="405" y="235" class="field">leader_user_id / status</text>
+
+  <rect x="960" y="120" width="260" height="155" class="box system" />
+  <text x="1090" y="150" text-anchor="middle" class="box-title">hrm_recruit_channel</text>
+  <text x="1090" y="176" text-anchor="middle" class="box-sub">招聘渠道</text>
+  <text x="985" y="210" class="field">id / name / status</text>
+  <text x="985" y="235" class="field">system_flag / sort</text>
+
+  <rect x="1280" y="120" width="260" height="155" class="box system" />
+  <text x="1410" y="150" text-anchor="middle" class="box-title">hrm_recruit_candidate</text>
+  <text x="1410" y="176" text-anchor="middle" class="box-sub">招聘候选人</text>
+  <text x="1305" y="210" class="field">id / post_id / status</text>
+  <text x="1305" y="235" class="field">entry_time / channel_id</text>
+
+  <rect x="45" y="390" width="265" height="160" class="box detail" />
+  <text x="178" y="421" text-anchor="middle" class="box-title small-title">hrm_employee_education_experience</text>
+  <text x="178" y="447" text-anchor="middle" class="box-sub">教育经历</text>
+  <text x="70" y="481" class="field">employee_id / education / sort</text>
+  <text x="70" y="506" class="field">graduate_school / major</text>
+  <text x="70" y="531" class="field">admission_time / graduation_time</text>
+
+  <rect x="350" y="390" width="245" height="160" class="box detail" />
+  <text x="473" y="421" text-anchor="middle" class="box-title small-title">hrm_employee_work_experience</text>
+  <text x="473" y="447" text-anchor="middle" class="box-sub">工作经历</text>
+  <text x="375" y="481" class="field">employee_id / work_unit</text>
+  <text x="375" y="506" class="field">post_name / start_time</text>
+  <text x="375" y="531" class="field">end_time / reason / sort</text>
+
+  <rect x="1005" y="350" width="245" height="160" class="box detail" />
+  <text x="1128" y="381" text-anchor="middle" class="box-title small-title">hrm_employee_training_experience</text>
+  <text x="1128" y="407" text-anchor="middle" class="box-sub">培训经历</text>
+  <text x="1030" y="441" class="field">employee_id / course</text>
+  <text x="1030" y="466" class="field">organization_name</text>
+  <text x="1030" y="491" class="field">start_time / end_time / sort</text>
+
+  <rect x="1305" y="350" width="245" height="185" class="box detail" />
+  <text x="1428" y="381" text-anchor="middle" class="box-title small-title">hrm_employee_certificate</text>
+  <text x="1428" y="407" text-anchor="middle" class="box-sub">证书/证件</text>
+  <text x="1330" y="441" class="field">employee_id / name / no</text>
+  <text x="1330" y="466" class="field">start_time / end_time</text>
+  <text x="1330" y="491" class="field">issuing_authority</text>
+  <text x="1330" y="516" class="field">issuing_time / sort</text>
+
+  <rect x="45" y="590" width="265" height="145" class="box detail" />
+  <text x="178" y="621" text-anchor="middle" class="box-title">hrm_employee_contact</text>
+  <text x="178" y="647" text-anchor="middle" class="box-sub">联系人</text>
+  <text x="70" y="681" class="field">employee_id / name / relation</text>
+  <text x="70" y="706" class="field">phone / work_unit / sort</text>
+
+  <rect x="350" y="590" width="245" height="185" class="box detail" />
+  <text x="473" y="621" text-anchor="middle" class="box-title">hrm_employee_contract</text>
+  <text x="473" y="647" text-anchor="middle" class="box-sub">员工合同</text>
+  <text x="375" y="681" class="field">employee_id / no / type</text>
+  <text x="375" y="706" class="field">start_time / end_time</text>
+  <text x="375" y="731" class="field">sign_time / status / term</text>
+  <text x="375" y="756" class="field">file_urls</text>
+
+  <rect x="1005" y="545" width="245" height="145" class="box detail" />
+  <text x="1128" y="576" text-anchor="middle" class="box-title">hrm_employee_file</text>
+  <text x="1128" y="602" text-anchor="middle" class="box-sub">材料附件</text>
+  <text x="1030" y="636" class="field">employee_id / type / url</text>
+
+  <rect x="1305" y="545" width="245" height="165" class="box detail" />
+  <text x="1428" y="576" text-anchor="middle" class="box-title small-title">hrm_employee_salary_card</text>
+  <text x="1428" y="602" text-anchor="middle" class="box-sub">工资卡</text>
+  <text x="1330" y="636" class="field">employee_id / bank_card_number</text>
+  <text x="1330" y="661" class="field">bank_area_id / bank_name</text>
+  <text x="1330" y="686" class="field">bank_branch_name</text>
+
+  <rect x="95" y="825" width="350" height="185" class="box life" />
+  <text x="270" y="856" text-anchor="middle" class="box-title">hrm_employee_change_record</text>
+  <text x="270" y="882" text-anchor="middle" class="box-sub">异动记录（转正/调岗/晋升/降级/转全职/再入职）</text>
+  <text x="125" y="916" class="field">employee_id / type / reason</text>
+  <text x="125" y="941" class="field">old_* / new_* 任职快照</text>
+  <text x="125" y="966" class="field">effect_time / applied_time</text>
+
+  <rect x="500" y="825" width="300" height="185" class="box life" />
+  <text x="650" y="856" text-anchor="middle" class="box-title">hrm_employee_quit_info</text>
+  <text x="650" y="882" text-anchor="middle" class="box-sub">离职信息（业务一对一）</text>
+  <text x="530" y="916" class="field">employee_id / plan_quit_time</text>
+  <text x="530" y="941" class="field">apply_quit_time / type / reason</text>
+  <text x="530" y="966" class="field">salary_settlement_time</text>
+  <text x="530" y="991" class="field">old_employee_status</text>
+
+  <rect x="855" y="825" width="300" height="185" class="box detail" />
+  <text x="1005" y="856" text-anchor="middle" class="box-title">hrm_employee_personal_note</text>
+  <text x="1005" y="882" text-anchor="middle" class="box-sub">个人备忘</text>
+  <text x="885" y="916" class="field">employee_id / content</text>
+  <text x="885" y="941" class="field">reminder_time</text>
+
+  <rect x="1210" y="825" width="300" height="185" class="box config" />
+  <text x="1360" y="856" text-anchor="middle" class="box-title">hrm_config</text>
+  <text x="1360" y="882" text-anchor="middle" class="box-sub">字段设置</text>
+  <text x="1240" y="916" class="field">type = 2 / 3 / 4</text>
+  <text x="1240" y="941" class="field">value = 字段配置 JSON</text>
+  <text x="1240" y="966" class="field">sort</text>
+
+  <path d="M320 210 C510 230 570 340 640 430" class="edge" />
+  <text x="445" y="270" class="edge-label">user_id → system_users.id（可空）</text>
+  <path d="M640 235 C720 260 730 310 745 350" class="edge" />
+  <text x="660" y="286" class="edge-label">dept_id → system_dept.id</text>
+  <path d="M1090 275 C1030 305 970 350 930 410" class="edge" />
+  <text x="980" y="321" class="edge-label">channel_id → channel.id</text>
+  <path d="M1410 275 C1320 320 1120 355 960 430" class="edge" />
+  <text x="1180" y="322" class="edge-label">candidate_id → candidate.id</text>
+
+  <path d="M310 465 L640 485" class="edge" /><path d="M595 465 L640 485" class="edge" />
+  <path d="M1005 425 L960 475" class="edge" /><path d="M1305 425 L960 500" class="edge" />
+  <path d="M310 660 L640 570" class="edge" /><path d="M595 660 L640 595" class="edge" />
+  <path d="M1005 620 L960 600" class="edge" /><path d="M1305 620 L960 625" class="edge" />
+
+  <path d="M270 825 C360 760 560 700 680 655" class="edge" />
+  <path d="M650 825 C700 770 735 730 760 710" class="edge" />
+  <path d="M1005 825 C955 770 915 730 880 710" class="edge" />
+  <text x="778" y="762" class="edge-label">各子表 employee_id → hrm_employee.id</text>
+
+  <path d="M960 520 C1030 480 1030 755 800 755 C570 755 570 500 640 520" class="edge" />
+  <rect x="705" y="744" width="190" height="22" class="label-bg" />
+  <text x="800" y="760" text-anchor="middle" class="edge-label">leader_employee_id → 本表 id</text>
+
+  <text x="60" y="1080" class="note">公共审计、多租户、逻辑删除字段从图中省略。工资与社保领域表在对应手册单独展开。</text>
+</svg>

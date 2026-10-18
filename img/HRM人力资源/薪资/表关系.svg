@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc">
+  <title id="title">HRM 薪资模块表关系</title>
+  <desc id="desc">展示计薪配置、薪资组、工资项、员工薪资档案、月度工资和工资条之间的关系</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#0f172a}
+      .section{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#334155}
+      .name{font:700 16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#0f172a}
+      .field{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#334155}
+      .note{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#475569}
+      .box{fill:#fff;stroke:#94a3b8;stroke-width:1.5;rx:10}
+      .config{fill:#eff6ff;stroke:#60a5fa}
+      .employee{fill:#f0fdf4;stroke:#4ade80}
+      .payroll{fill:#fff7ed;stroke:#fb923c}
+      .slip{fill:#faf5ff;stroke:#c084fc}
+      .line{fill:none;stroke:#64748b;stroke-width:1.8;marker-end:url(#arrow)}
+      .primary{fill:none;stroke:#2563eb;stroke-width:2.2;marker-end:url(#arrowBlue)}
+      .snapshot{fill:none;stroke:#64748b;stroke-width:1.6;stroke-dasharray:7 5;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="1040" fill="#f8fafc"/>
+  <text x="60" y="56" class="title">HRM 薪资模块表关系</text>
+  <text x="60" y="88" class="note">实线表示编号关联或业务归属；虚线表示 JSON 配置/项目快照进入后续单据</text>
+
+  <text x="60" y="132" class="section">计薪配置</text>
+  <rect x="60" y="150" width="300" height="122" class="box config"/>
+  <text x="78" y="180" class="name">hrm_salary_config</text>
+  <text x="78" y="207" class="field">cycle_start_day / cycle_end_day</text>
+  <text x="78" y="231" class="field">social_security_month_type</text>
+  <text x="78" y="255" class="field">start_year / start_month</text>
+
+  <rect x="410" y="150" width="300" height="122" class="box config"/>
+  <text x="428" y="180" class="name">hrm_salary_tax_rule</text>
+  <text x="428" y="207" class="field">type / tax_enabled / threshold</text>
+  <text x="428" y="231" class="field">decimal_scale / cycle_type</text>
+
+  <rect x="760" y="150" width="340" height="146" class="box config"/>
+  <text x="778" y="180" class="name">hrm_salary_group</text>
+  <text x="778" y="207" class="field">dept_ids[] / employee_ids[]</text>
+  <text x="778" y="231" class="field">tax_rule_id → tax_rule.id</text>
+  <text x="778" y="255" class="field">salary_standard / change_rule</text>
+  <text x="778" y="279" class="note">员工直配优先，其次匹配最近部门</text>
+
+  <rect x="1150" y="126" width="360" height="118" class="box config"/>
+  <text x="1168" y="156" class="name">hrm_salary_option_template</text>
+  <text x="1168" y="183" class="field">code / parent_code / type</text>
+  <text x="1168" y="207" class="field">tax_enabled / calculate_enabled</text>
+  <text x="1168" y="229" class="note">平台标准目录，忽略租户隔离</text>
+
+  <rect x="1150" y="278" width="360" height="142" class="box config"/>
+  <text x="1168" y="308" class="name">hrm_salary_option</text>
+  <text x="1168" y="335" class="field">template_id → option_template.id</text>
+  <text x="1168" y="359" class="field">code / parent_code / type</text>
+  <text x="1168" y="383" class="field">visible / enabled / calculate_enabled</text>
+  <text x="1168" y="405" class="note">租户工资项，tenant_id + code 唯一</text>
+
+  <rect x="760" y="338" width="340" height="112" class="box config"/>
+  <text x="778" y="368" class="name">hrm_salary_change_template</text>
+  <text x="778" y="395" class="field">default_status / options(JSON)</text>
+  <text x="778" y="421" class="note">保存可调工资项的编码与名称快照</text>
+
+  <text x="60" y="354" class="section">员工薪资档案</text>
+  <rect x="60" y="374" width="300" height="124" class="box employee"/>
+  <text x="78" y="404" class="name">hrm_employee</text>
+  <text x="78" y="431" class="field">id / dept_id / user_id</text>
+  <text x="78" y="455" class="field">entry_time / regular_time / leave_time</text>
+  <text x="78" y="480" class="note">员工主档；user_id 可空</text>
+
+  <rect x="410" y="344" width="300" height="174" class="box employee"/>
+  <text x="428" y="374" class="name">hrm_salary_employee_info</text>
+  <text x="428" y="401" class="field">employee_id → employee.id</text>
+  <text x="428" y="425" class="field">change_type / change_reason / effect_time</text>
+  <text x="428" y="449" class="field">regular_salary / probation_salary</text>
+  <text x="428" y="473" class="field">salary_options(JSON)</text>
+  <text x="428" y="497" class="field">probation_salary_options(JSON)</text>
+
+  <rect x="410" y="558" width="300" height="172" class="box employee"/>
+  <text x="428" y="588" class="name">hrm_salary_change_record</text>
+  <text x="428" y="615" class="field">employee_id → employee.id</text>
+  <text x="428" y="639" class="field">type / reason / effect_time / status</text>
+  <text x="428" y="663" class="field">before_total / after_total</text>
+  <text x="428" y="687" class="field">salary_options(JSON 后态快照)</text>
+  <text x="428" y="711" class="note">定薪、调薪历史及未来待生效记录</text>
+
+  <text x="60" y="602" class="section">月度核算</text>
+  <rect x="760" y="510" width="340" height="270" class="box payroll"/>
+  <text x="778" y="540" class="name">hrm_salary_month_record</text>
+  <text x="778" y="567" class="field">year / month / start_time / end_time</text>
+  <text x="778" y="591" class="field">employee_count / status</text>
+  <text x="778" y="615" class="field">expected_pay_salary / personal_tax</text>
+  <text x="778" y="639" class="field">real_pay_salary</text>
+  <text x="778" y="663" class="field">personal_insurance_amount</text>
+  <text x="778" y="687" class="field">personal_provident_fund_amount</text>
+  <text x="778" y="711" class="field">corporate_insurance_amount</text>
+  <text x="778" y="735" class="field">corporate_provident_fund_amount</text>
+  <text x="778" y="759" class="field">option_headers(JSON 表头快照)</text>
+
+  <rect x="1150" y="494" width="360" height="230" class="box payroll"/>
+  <text x="1168" y="524" class="name">hrm_salary_month_employee_record</text>
+  <text x="1168" y="551" class="field">month_record_id → month_record.id</text>
+  <text x="1168" y="575" class="field">employee_id → employee.id</text>
+  <text x="1168" y="599" class="field">year / month / actual_work_day</text>
+  <text x="1168" y="623" class="field">expected_pay_salary / taxable_salary</text>
+  <text x="1168" y="647" class="field">personal_tax / real_pay_salary</text>
+  <text x="1168" y="671" class="field">option_values(JSON 当月快照)</text>
+  <text x="1168" y="705" class="note">每个员工、每个月的核算结果</text>
+
+  <text x="60" y="794" class="section">工资条</text>
+  <rect x="60" y="814" width="340" height="142" class="box slip"/>
+  <text x="78" y="844" class="name">hrm_salary_slip_template</text>
+  <text x="78" y="871" class="field">hide_empty / default_status</text>
+  <text x="78" y="895" class="field">options(JSON 树形布局)</text>
+  <text x="78" y="929" class="note">模板保存分类、工资项、说明与排序</text>
+
+  <rect x="540" y="814" width="360" height="142" class="box slip"/>
+  <text x="558" y="844" class="name">hrm_salary_slip_send_record</text>
+  <text x="558" y="871" class="field">month_record_id → month_record.id</text>
+  <text x="558" y="895" class="field">year / month / employee_count</text>
+  <text x="558" y="919" class="field">send_employee_count（本批次发放人数）</text>
+
+  <rect x="1050" y="790" width="460" height="190" class="box slip"/>
+  <text x="1068" y="820" class="name">hrm_salary_slip</text>
+  <text x="1068" y="847" class="field">send_record_id → slip_send_record.id</text>
+  <text x="1068" y="871" class="field">month_employee_record_id → month_employee_record.id</text>
+  <text x="1068" y="895" class="field">employee_id → employee.id</text>
+  <text x="1068" y="919" class="field">read_status / real_pay_salary / remark</text>
+  <text x="1068" y="943" class="field">options(JSON 发放时快照)</text>
+  <text x="1068" y="967" class="note">同员工同年月只允许一张有效工资条</text>
+
+  <path d="M710 210 H760" class="primary"/>
+  <path d="M1330 244 V278" class="primary"/>
+  <path d="M360 436 H410" class="primary"/>
+  <path d="M560 518 V558" class="primary"/>
+  <path d="M1100 610 H1150" class="primary"/>
+  <path d="M210 272 C210 540 650 532 760 572" class="line"/>
+  <path d="M1100 250 H1125 V540 H1100" class="line"/>
+  <path d="M1330 420 V494" class="snapshot"/>
+  <path d="M710 645 C880 645 980 646 1150 646" class="snapshot"/>
+  <path d="M930 780 C930 796 720 796 720 814" class="primary"/>
+  <path d="M400 930 V1005 H1030 V930 H1050" class="snapshot"/>
+  <path d="M900 885 H1050" class="primary"/>
+  <path d="M1330 708 V790" class="primary"/>
+
+  <text x="718" y="198" class="note">tax_rule_id</text>
+  <text x="1340" y="264" class="note">同步标准项</text>
+  <text x="371" y="426" class="note">1 : 1</text>
+  <text x="570" y="544" class="note">1 : N</text>
+  <text x="1110" y="600" class="note">1 : N</text>
+  <text x="910" y="754" class="note">1 : N</text>
+  <text x="920" y="873" class="note">1 : N</text>
+</svg>

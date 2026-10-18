@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">HRM 社保管理表关系</title>
+  <desc id="desc">参保方案、方案项目、员工参保资料、月表和员工月度快照及其与薪资的关系。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:25px;font-weight:700;fill:#0f172a}
+      .subtitle{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:13px;font-weight:400;fill:#64748b}
+      .box-title{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:15px;font-weight:700;fill:#0f172a}
+      .field{font-family:Menlo,Monaco,"PingFang SC","Microsoft YaHei",monospace;font-size:12px;font-weight:400;fill:#334155}
+      .label{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:11px;font-weight:600;fill:#475569}
+      .note{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:12px;font-weight:600;fill:#6d28d9}
+      .line{fill:none;stroke:#64748b;stroke-width:1.6;marker-end:url(#arrow)}
+      .dash{fill:none;stroke:#7c3aed;stroke-width:1.7;stroke-dasharray:6 5;marker-end:url(#arrowPurple)}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <text class="title" x="42" y="42">HRM 社保管理表关系</text>
+  <text class="subtitle" x="42" y="67">方案与员工资料是当前配置；员工月记录保存当月 projects JSON 和金额快照</text>
+
+  <!-- 员工 -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="270" width="220" height="126" rx="12" fill="#ffffff" stroke="#93c5fd"/>
+    <rect x="40" y="270" width="220" height="36" rx="12" fill="#dbeafe"/>
+    <rect x="40" y="294" width="220" height="12" fill="#dbeafe"/>
+    <text class="box-title" x="56" y="294">hrm_employee</text>
+    <text class="field" x="56" y="330">PK id</text>
+    <text class="field" x="56" y="354">user_id → system_users</text>
+    <text class="field" x="56" y="378">status / entry_status</text>
+  </g>
+
+  <!-- 方案 -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="92" width="290" height="176" rx="12" fill="#ffffff" stroke="#5eead4"/>
+    <rect x="340" y="92" width="290" height="36" rx="12" fill="#ccfbf1"/>
+    <rect x="340" y="116" width="290" height="12" fill="#ccfbf1"/>
+    <text class="box-title" x="356" y="116">hrm_insurance_scheme</text>
+    <text class="field" x="356" y="151">PK id / name</text>
+    <text class="field" x="356" y="175">area_id / household_type</text>
+    <text class="field" x="356" y="199">type：1 比例 / 2 固定金额</text>
+    <text class="label" x="356" y="230">修改时创建新 id，并迁移引用</text>
+    <text class="label" x="356" y="249">被员工或月记录使用时不能删除</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="760" y="92" width="320" height="200" rx="12" fill="#ffffff" stroke="#5eead4"/>
+    <rect x="760" y="92" width="320" height="36" rx="12" fill="#ccfbf1"/>
+    <rect x="760" y="116" width="320" height="12" fill="#ccfbf1"/>
+    <text class="box-title" x="776" y="116">hrm_insurance_scheme_project</text>
+    <text class="field" x="776" y="151">PK id</text>
+    <text class="field" x="776" y="175">scheme_id → scheme.id</text>
+    <text class="field" x="776" y="199">type / name / base_amount</text>
+    <text class="field" x="776" y="223">corporate_rate / personal_rate</text>
+    <text class="field" x="776" y="247">corporate_amount / personal_amount</text>
+    <text class="label" x="776" y="274">方案 1:N 缴费项目</text>
+  </g>
+
+  <!-- 员工当前资料 -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="320" width="290" height="224" rx="12" fill="#ffffff" stroke="#fdba74"/>
+    <rect x="340" y="320" width="290" height="36" rx="12" fill="#ffedd5"/>
+    <rect x="340" y="344" width="290" height="12" fill="#ffedd5"/>
+    <text class="box-title" x="356" y="344">hrm_insurance_employee_info</text>
+    <text class="field" x="356" y="379">PK id</text>
+    <text class="field" x="356" y="403">employee_id → hrm_employee.id</text>
+    <text class="field" x="356" y="427">scheme_id → scheme.id</text>
+    <text class="field" x="356" y="451">first_social_security</text>
+    <text class="field" x="356" y="475">first_accumulation_fund</text>
+    <text class="field" x="356" y="499">social_security_number</text>
+    <text class="field" x="356" y="523">social_security_start_month</text>
+  </g>
+
+  <!-- 月表 -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="588" width="290" height="106" rx="12" fill="#ffffff" stroke="#c4b5fd"/>
+    <rect x="340" y="588" width="290" height="36" rx="12" fill="#ede9fe"/>
+    <rect x="340" y="612" width="290" height="12" fill="#ede9fe"/>
+    <text class="box-title" x="356" y="612">hrm_insurance_month_record</text>
+    <text class="field" x="356" y="647">PK id / year / month / status</text>
+    <text class="field" x="356" y="671">人数与四类金额汇总</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="760" y="352" width="320" height="272" rx="12" fill="#ffffff" stroke="#c4b5fd"/>
+    <rect x="760" y="352" width="320" height="36" rx="12" fill="#ede9fe"/>
+    <rect x="760" y="376" width="320" height="12" fill="#ede9fe"/>
+    <text class="box-title" x="776" y="376">hrm_insurance_month_employee_record</text>
+    <text class="field" x="776" y="411">PK id</text>
+    <text class="field" x="776" y="435">month_record_id → month_record.id</text>
+    <text class="field" x="776" y="459">employee_id → hrm_employee.id</text>
+    <text class="field" x="776" y="483">scheme_id → scheme.id</text>
+    <text class="field" x="776" y="507">year / month / status</text>
+    <text class="field" x="776" y="531">个人/公司社保、公积金金额</text>
+    <text class="field" x="776" y="555">projects [JSON 当月快照]</text>
+    <text class="label" x="776" y="581">status：0 停保 / 1 正常</text>
+    <text class="label" x="776" y="602">历史金额不随方案更新重算</text>
+  </g>
+
+  <!-- 薪资消费者 -->
+  <g filter="url(#shadow)">
+    <rect x="1130" y="464" width="120" height="112" rx="14" fill="#faf5ff" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="7 5"/>
+    <text class="box-title" x="1148" y="496">薪资月计算</text>
+    <text class="note" x="1148" y="526">只读取正常</text>
+    <text class="note" x="1148" y="550">员工月快照</text>
+  </g>
+
+  <!-- 关系线 -->
+  <path class="line" d="M630 176 H760"/>
+  <text class="label" x="669" y="165">1:N 项目</text>
+  <path class="line" d="M260 322 H315 Q328 322 340 403"/>
+  <text class="label" x="270" y="310">1:0..1 当前资料</text>
+  <path class="line" d="M485 268 V320"/>
+  <text class="label" x="496" y="299">1:N 当前员工</text>
+  <path class="line" d="M260 365 H300 V566 H712 Q732 566 760 459"/>
+  <text class="label" x="638" y="558">1:N 月记录</text>
+  <path class="line" d="M630 641 H706 Q728 641 760 544"/>
+  <text class="label" x="642" y="661">1:N 员工明细</text>
+  <path class="line" d="M630 218 H700 Q724 218 724 483 H760"/>
+  <text class="label" x="643" y="207">1:N 方案引用</text>
+  <path class="dash" d="M920 292 V334 Q920 344 920 352"/>
+  <text class="label" x="932" y="326">生成 projects 快照</text>
+  <path class="dash" d="M1080 520 H1130"/>
+  <text class="label" x="1087" y="509">正常状态</text>
+
+  <rect x="40" y="610" width="250" height="70" rx="10" fill="#fff7ed" stroke="#fdba74"/>
+  <text class="label" x="56" y="635">归档：创建次月时自动归档前月</text>
+  <text class="label" x="56" y="658">删除最新月后，上一月恢复未归档</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#5b8ff9"/></marker><style>.h{font:700 22px sans-serif;fill:#1f2937}.n{font:15px sans-serif;fill:#374151}.b{fill:#f8fbff;stroke:#5b8ff9;stroke-width:2}.l{stroke:#5b8ff9;stroke-width:2;fill:none;marker-end:url(#a)}</style></defs>
+  <text x="600" y="38" text-anchor="middle" class="h">知识库、内容与协作表关系</text>
+  <rect x="450" y="70" width="300" height="70" rx="10" class="b"/><text x="600" y="113" text-anchor="middle" class="n">pms_knowledge_library</text>
+  <rect x="45" y="210" width="245" height="58" rx="8" class="b"/><text x="167" y="246" text-anchor="middle" class="n">library_member / group</text>
+  <rect x="320" y="210" width="245" height="58" rx="8" class="b"/><text x="442" y="246" text-anchor="middle" class="n">folder / document</text>
+  <rect x="625" y="210" width="245" height="58" rx="8" class="b"/><text x="747" y="246" text-anchor="middle" class="n">content_permission</text>
+  <rect x="900" y="210" width="245" height="58" rx="8" class="b"/><text x="1022" y="246" text-anchor="middle" class="n">library_template</text>
+  <rect x="85" y="365" width="245" height="58" rx="8" class="b"/><text x="207" y="401" text-anchor="middle" class="n">document_comment / like</text>
+  <rect x="360" y="365" width="245" height="58" rx="8" class="b"/><text x="482" y="401" text-anchor="middle" class="n">document_share</text>
+  <rect x="635" y="365" width="245" height="58" rx="8" class="b"/><text x="757" y="401" text-anchor="middle" class="n">favorite / view_record</text>
+  <rect x="910" y="365" width="245" height="58" rx="8" class="b"/><text x="1032" y="401" text-anchor="middle" class="n">recycle_record / label</text>
+  <path d="M500 140 L170 205" class="l"/><path d="M550 140 L440 205" class="l"/><path d="M650 140 L750 205" class="l"/><path d="M700 140 L1020 205" class="l"/><path d="M520 140 L205 360" class="l"/><path d="M580 140 L480 360" class="l"/><path d="M650 140 L760 360" class="l"/><path d="M700 140 L1030 360" class="l"/>
+  <text x="600" y="500" text-anchor="middle" class="n">folder/document 使用 library_id、parent_id、permission_id 组成内容树</text>
+  <text x="600" y="535" text-anchor="middle" class="n">删除先登记 recycle_record；恢复和彻底删除由回收站服务处理</text>
+</svg>
